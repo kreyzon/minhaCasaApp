@@ -1,0 +1,42 @@
+
+body {
+    background-color:#ecf0f1;
+}
+
+/* MDL Stuffs */
+.card-group{
+    display: flex;
+}
+
+.shop-card.mdl-card {
+  width: 524px;
+  margin: 5em;
+}
+
+.shop-card > .mdl-card__title {
+  color: #fff;
+  height: 100px;
+  background: url('../img/shopping.jpg') center / cover;
+}
+.bill-card.mdl-card {
+  width: 524px;
+  margin: 5em;
+}
+
+.bill-card > .mdl-card__title {
+  color: #fff;
+  height: 100px;
+  background: url('../img/billing.jpg') center / cover;
+}
+
+.icon_cart{
+    color: #fff;
+    height: 60px;
+    background: url('../img/cart.png') center / cover;
+}
+
+.icon_cashmachine{
+    color: #fff;
+    height: 60px;
+    background: url('../img/cashmachine.png') center / cover;
+}

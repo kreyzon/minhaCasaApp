@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="format-detection" content="telephone=no">
+        <meta name="msapplication-tap-highlight" content="no">
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+        <link rel="stylesheet" type="text/css" href="css/index.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.deep_purple-green.min.css" />
+        <script defer src="https://code.getmdl.io/1.2.1/material.min.js"></script>
+        <script src="http://www.w3schools.com/lib/w3data.js"></script>
+
+        <title>Teste Incrível</title>
+    </head>
+    <body>
+        <div class="mdl-layout mdl-js-layout">
+          <header class="mdl-layout__header mdl-layout__header--scroll">
+            <div class="mdl-layout__header-row">
+              <span class="mdl-layout-title">Teste Incrível</span>
+              <div class="mdl-layout-spacer"></div>
+              <nav class="mdl-navigation">
+                <li id="show-login" class="mdl-navigation__link">Entrar</li>
+                <li id="show-register" class="mdl-navigation__link">Registrar</li>
+              </nav>
+            </div>
+          </header>
+          <div class="mdl-layout__drawer">
+            <span class="mdl-layout-title">Cadastros</span>
+            <nav class="mdl-navigation">
+              <a class="mdl-navigation__link" href="#" onclick="nav('produtos')">Produtos</a>
+              <a class="mdl-navigation__link" href="">Categorias</a>
+              <a class="mdl-navigation__link" href="">Contas</a>
+              <a class="mdl-navigation__link " href="">Carteiras</a>
+            </nav>
+          </div>
+          <main class="mdl-layout__content">
+            <div id="content" class="page-content">
+                <div class="mdl-grid">
+                    <div class="mdl-cell mdl-cell--6-col">
+                        <div class="shop-card mdl-card  mdl-shadow--6dp">
+                          <div class="mdl-card__title">
+                          </div>
+                          <div class="mdl-card__supporting-text">
+                              <div class="mdl-grid">
+                                      <div class="mdl-cell mdl-cell--10-col">
+                                          <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
+                                            <thead>
+                                              <tr>
+                                                <th class="mdl-data-table__cell--non-numeric">Produto</th>
+                                                <th>Categoria</th>
+                                                <th>Quantidade</th>
+                                              </tr>
+                                            </thead>
+                                            <tbody>
+                                              <tr>
+                                                <td class="mdl-data-table__cell--non-numeric">Pão</td>
+                                                <td>Alimento</td>
+                                                <td>6</td>
+                                              </tr>
+                                              <tr>
+                                                <td class="mdl-data-table__cell--non-numeric">Leite</td>
+                                                <td>Alimento</td>
+                                                <td>4</td>
+                                              </tr>
+                                              <tr>
+                                                <td class="mdl-data-table__cell--non-numeric">Ração</td>
+                                                <td>Yuno</td>
+                                                <td>1</td>
+                                              </tr>
+                                            </tbody>
+                                          </table>
+                                      </div>
+                                      <div class="mdl-cell mdl-cell--2-col mdl-cell--middle">
+
+                                          <button class="mdl-button mdl-js-button mdl-button--fab">
+                                              <div class="icon_cart">
+                                              </div>
+                                            </button>
+                                          <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored">
+                                              <i class="material-icons">add</i>
+                                            </button>
+                                            <button class="mdl-button mdl-js-button mdl-button--fab">
+                                              <i class="material-icons md-48">assignment</i>
+                                            </button>
+                                            <button id="demo-menu-top-right"
+                                                    class="mdl-button mdl-js-button mdl-button--icon">
+                                              <i class="material-icons">more_vert</i>
+                                            </button>
+
+                                            <ul class="mdl-menu mdl-menu--top-left mdl-js-menu mdl-js-ripple-effect"
+                                                data-mdl-for="demo-menu-top-right">
+                                              <li class="mdl-menu__item">Some Action</li>
+                                              <li class="mdl-menu__item">Another Action</li>
+                                              <li class="mdl-menu__item">Yet Another Action</li>
+                                            </ul>
+                                      </div>
+                                </div>
+                          </div>
+                        </div>
+                    </div>
+                    <div class="mdl-cell mdl-cell--6-col">
+                        <div class="bill-card mdl-card  mdl-shadow--6dp">
+                          <div class="mdl-card__title">
+                          </div>
+                          <div class="mdl-card__supporting-text">
+                              <div class="mdl-grid">
+                                    <div class="mdl-cell mdl-cell--10-col">
+                                      <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
+                                        <thead>
+                                          <tr>
+                                            <th class="mdl-data-table__cell--non-numeric">Conta</th>
+                                            <th>Vencimento</th>
+                                            <th>Valor</th>
+                                          </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                          <td class="mdl-data-table__cell--non-numeric">Condomínio</td>
+                                          <td>10/11/2016</td>
+                                          <td>200.00</td>
+                                        </tr>
+                                        <tr>
+                                          <td class="mdl-data-table__cell--non-numeric">Internet</td>
+                                          <td>10/11/2016</td>
+                                          <td>65.00</td>
+                                        </tr>
+                                          <tr>
+                                            <td class="mdl-data-table__cell--non-numeric">Energia</td>
+                                            <td>14/11/2016</td>
+                                            <td>72.90</td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                    </div>
+                                    <div class="mdl-cell mdl-cell--2-col mdl-cell--middle">
+                                        <button class="mdl-button mdl-js-button mdl-button--fab icon_cashmachine">
+                                            <div class="icon_cashmachine">
+                                            </div>
+                                        </button>
+                                        <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored">
+                                          <i class="material-icons md-48">add</i>
+                                        </button>
+                                        <button class="mdl-button mdl-js-button mdl-button--fab">
+                                          <i class="material-icons md-48">assignment</i>
+                                        </button>
+                                        <button id="demo-menu-top-left"
+                                                class="mdl-button mdl-js-button mdl-button--icon">
+                                          <i class="material-icons">more_vert</i>
+                                        </button>
+
+                                        <ul class="mdl-menu mdl-menu--top-left mdl-js-menu mdl-js-ripple-effect"
+                                            data-mdl-for="demo-menu-top-left">
+                                          <li class="mdl-menu__item">Some Action</li>
+                                          <li class="mdl-menu__item">Another Action</li>
+                                          <li class="mdl-menu__item">Yet Another Action</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          </main>
+        </div>
+
+        <dialog id="login-dialog" class="mdl-dialog">
+            <h4 class="mdl-dialog__title">Sign-in!</h4>
+            <div class="mdl-dialog__content">
+                <div style="width: 100%" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input id="login" type="text" class="mdl-textfield__input">
+                    <label class="mdl-textfield__label" for="login">Login</label>
+                </div>
+                <div style="width: 100%" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input id="senha" type="password" class="mdl-textfield__input">
+                    <label class="mdl-textfield__label" for="senha">Senha</label>
+                </div>
+            </div>
+            <div class="mdl-dialog__actions">
+              <input onclick="logar();" class="get-app mdl-button mdl-button--raised mdl-button--colored mdl-js-button mdl-js-ripple-effect" type="button" value="Logar"/>
+              <button type="button" class="mdl-button close">Cancelar</button>
+            </div>
+        </dialog>
+
+        <dialog id="register-dialog" class="mdl-dialog">
+            <h4 class="mdl-dialog__title">Registre-se!</h4>
+            <div class="mdl-dialog__content">
+                <div style="width: 100%" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input id="login" type="text" class="mdl-textfield__input">
+                    <label class="mdl-textfield__label" for="login">Login</label>
+                </div>
+                <div style="width: 100%" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input id="name" type="text" class="mdl-textfield__input">
+                    <label class="mdl-textfield__label" for="name">Nome</label>
+                </div>
+                <div style="width: 100%" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input id="senha" type="password" class="mdl-textfield__input">
+                    <label class="mdl-textfield__label" for="senha">Senha</label>
+                </div>
+                <div style="width: 100%" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input id="ressenha" type="password" class="mdl-textfield__input">
+                    <label class="mdl-textfield__label" for="ressenha">Confirme a senha</label>
+                </div>
+            </div>
+            <div class="mdl-dialog__actions">
+              <input onclick="cadastrar();" class="get-app mdl-button mdl-button--raised mdl-button--colored mdl-js-button mdl-js-ripple-effect" type="button" value="Cadastrar"/>
+              <button type="button" class="mdl-button close">Cancelar</button>
+            </div>
+        </dialog>
+
+        <script type="text/javascript" src="js/index.js"></script>
+        <script type="text/javascript" src="js/firebase.js"></script>
+        <script type="text/javascript" src="js/app.js"></script>
+        <script type="text/javascript" src="js/nav.js"></script>
+    </body>
+</html>
