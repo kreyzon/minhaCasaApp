@@ -41,6 +41,7 @@ function logar(){
                 listaItensCompras = s.val();
                 console.log(listaItensCompras);
               });
+          dialog.close();
         }else{
             console.log("USER NOT ENCONTRADO");
         }
