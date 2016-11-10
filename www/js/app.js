@@ -20,7 +20,11 @@ function logar(){
     senha = document.getElementById("senha").value;
     userDAO = firebaseConnection.database().ref('/users/'+login);
     userDAO.once('value').then(function(snapshot) {
-        if(snapshot.val() != null){
+        alert("achou user!");
+        alert(snapshot.val().senha == senha);
+        if(snapshot.val() != null && snapshot.val().senha == senha){
+            alert("senha certa!");
+            window.sessionStorage.setItem('usuario', login);
             base = snapshot.val().base;
             categoriaDAO = firebaseConnection.database().ref('/'+base+'/categorias/');
             categoriaDAO.once('value').then(function(s) {
