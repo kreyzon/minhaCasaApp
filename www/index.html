@@ -9,7 +9,6 @@
         <link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.deep_purple-green.min.css" />
         <script defer src="https://code.getmdl.io/1.2.1/material.min.js"></script>
         <script src="http://www.w3schools.com/lib/w3data.js"></script>
-
         <title>Teste Incrível</title>
     </head>
     <body>
@@ -19,8 +18,16 @@
               <span class="mdl-layout-title">Teste Incrível</span>
               <div class="mdl-layout-spacer"></div>
               <nav class="mdl-navigation">
-                <li id="show-login" class="mdl-navigation__link">Entrar</li>
-                <li id="show-register" class="mdl-navigation__link">Registrar</li>
+                <li id="show-login" class="mdl-navigation__link">
+                    <button class="mdl-button mdl-js-button mdl-button--colored mdl-button--raised mdl-js-ripple-effect">
+                      Entrar
+                    </button>
+                </li>
+                <li id="show-register" class="mdl-navigation__link">
+                    <button class="mdl-button mdl-js-button mdl-button--accent mdl-button--raised mdl-js-ripple-effect">
+                       Registrar
+                   </button>
+                </li>
               </nav>
             </div>
           </header>
@@ -34,7 +41,11 @@
             </nav>
           </div>
           <main class="mdl-layout__content">
-            <div id="content" class="page-content">
+
+              <div id="content" class="page-content">
+                  <div id="progresso" style="display:none">
+                      <div class="mdl-spinner mdl-js-spinner mdl-spinner--single-color is-active" style="z-index:999;left:10%; position:absolute;top:50%"></div>
+                  </div>
                 <div class="mdl-grid">
                     <div class="mdl-cell mdl-cell--6-col">
                         <div class="shop-card mdl-card  mdl-shadow--6dp">

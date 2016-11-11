@@ -16,14 +16,12 @@ var listaProdutos;
 var listaItensCompras;
 
 function logar(){
+    document.getElementById("progresso").style.display = "block";
     login = document.getElementById("login").value;
     senha = document.getElementById("senha").value;
     userDAO = firebaseConnection.database().ref('/users/'+login);
     userDAO.once('value').then(function(snapshot) {
-        alert("achou user!");
-        alert(snapshot.val().senha == senha);
         if(snapshot.val() != null && snapshot.val().senha == senha){
-            alert("senha certa!");
             window.sessionStorage.setItem('usuario', login);
             base = snapshot.val().base;
             categoriaDAO = firebaseConnection.database().ref('/'+base+'/categorias/');
@@ -49,6 +47,7 @@ function logar(){
     }, function(error) {
       console.error(error);
     });
+    document.getElementById("progresso").style.display = "none";
 }
 
 function pesquisarCategoriaById(id){
