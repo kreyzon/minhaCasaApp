@@ -9,8 +9,8 @@ body {
 }
 
 .shop-card.mdl-card {
-  width: 524px;
-  margin: 5em;
+  /*width: 524px;
+  margin: 5em;*/
 }
 
 .shop-card > .mdl-card__title {
@@ -19,8 +19,8 @@ body {
   background: url('../img/shopping.jpg') center / cover;
 }
 .bill-card.mdl-card {
-  width: 524px;
-  margin: 5em;
+  /*width: 524px;
+  margin: 5em;*/
 }
 
 .bill-card > .mdl-card__title {

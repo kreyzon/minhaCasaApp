@@ -12,10 +12,10 @@
         <title>Teste Incrível</title>
     </head>
     <body>
-        <div class="mdl-layout mdl-js-layout">
+        <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
           <header class="mdl-layout__header mdl-layout__header--scroll">
             <div class="mdl-layout__header-row">
-              <span class="mdl-layout-title">Teste Incrível</span>
+              <span class="mdl-layout-title">Minha Casa</span>
               <div class="mdl-layout-spacer"></div>
               <nav class="mdl-navigation">
                 <li id="show-login" class="mdl-navigation__link">
@@ -43,46 +43,39 @@
           <main class="mdl-layout__content">
 
               <div id="content" class="page-content">
-                  <div id="progresso" style="display:none">
-                      <div class="mdl-spinner mdl-js-spinner mdl-spinner--single-color is-active" style="z-index:999;left:10%; position:absolute;top:50%"></div>
-                  </div>
                 <div class="mdl-grid">
                     <div class="mdl-cell mdl-cell--6-col">
                         <div class="shop-card mdl-card  mdl-shadow--6dp">
                           <div class="mdl-card__title">
+                              Lista de Compras
                           </div>
                           <div class="mdl-card__supporting-text">
                               <div class="mdl-grid">
-                                      <div class="mdl-cell mdl-cell--10-col">
+                                      <div class="mdl-cell mdl-cell--10-col-desktop mdl-cell--12-col-phone">
                                           <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
                                             <thead>
                                               <tr>
                                                 <th class="mdl-data-table__cell--non-numeric">Produto</th>
-                                                <th>Categoria</th>
                                                 <th>Quantidade</th>
                                               </tr>
                                             </thead>
                                             <tbody>
                                               <tr>
                                                 <td class="mdl-data-table__cell--non-numeric">Pão</td>
-                                                <td>Alimento</td>
                                                 <td>6</td>
                                               </tr>
                                               <tr>
                                                 <td class="mdl-data-table__cell--non-numeric">Leite</td>
-                                                <td>Alimento</td>
                                                 <td>4</td>
                                               </tr>
                                               <tr>
                                                 <td class="mdl-data-table__cell--non-numeric">Ração</td>
-                                                <td>Yuno</td>
                                                 <td>1</td>
                                               </tr>
                                             </tbody>
                                           </table>
                                       </div>
-                                      <div class="mdl-cell mdl-cell--2-col mdl-cell--middle">
-
+                                      <div class="mdl-cell mdl-cell--2-col-desktop mdl-cell--12-col-phone">
                                           <button class="mdl-button mdl-js-button mdl-button--fab">
                                               <div class="icon_cart">
                                               </div>
@@ -188,8 +181,10 @@
                 </div>
             </div>
             <div class="mdl-dialog__actions">
-              <input onclick="logar();" class="get-app mdl-button mdl-button--raised mdl-button--colored mdl-js-button mdl-js-ripple-effect" type="button" value="Logar"/>
               <button type="button" class="mdl-button close">Cancelar</button>
+              <div id="progresso" class="mdl-spinner mdl-js-spinner mdl-spinner--single-color is-active" style="z-index:999;left:10%; position:absolute;display:none"></div>
+              <input onclick="logar();" class="get-app mdl-button mdl-button--raised mdl-button--colored mdl-js-button mdl-js-ripple-effect" type="button" value="Logar"/>
+
             </div>
         </dialog>
 
