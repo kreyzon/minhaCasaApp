@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta charset="UTF-8">
         <meta name="format-detection" content="telephone=no">
         <meta name="msapplication-tap-highlight" content="no">
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
@@ -11,13 +12,13 @@
         <script src="http://www.w3schools.com/lib/w3data.js"></script>
         <title>Teste Incrível</title>
     </head>
-    <body>
+    <body onload="checarLogin();">
         <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
           <header class="mdl-layout__header mdl-layout__header--scroll">
             <div class="mdl-layout__header-row">
               <span class="mdl-layout-title">Minha Casa</span>
               <div class="mdl-layout-spacer"></div>
-              <nav class="mdl-navigation">
+              <nav id="nav-login" class="mdl-navigation">
                 <li id="show-login" class="mdl-navigation__link">
                     <button class="mdl-button mdl-js-button mdl-button--colored mdl-button--raised mdl-js-ripple-effect">
                       Entrar
@@ -28,6 +29,18 @@
                        Registrar
                    </button>
                 </li>
+              </nav>
+              <nav id="nav-logout" class="mdl-navigation" style="display:none">
+                <li id="show-config" class="mdl-navigation__link">
+                    <button id="config" class="mdl-button mdl-js-button mdl-button--colored mdl-button--raised mdl-js-ripple-effect">
+
+                    </button>
+                </li>
+                <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
+                    data-mdl-for="config">
+                  <li class="mdl-menu__item">Some Action</li>
+                  <li class="mdl-menu__item">Logout</li>
+                </ul>
               </nav>
             </div>
           </header>

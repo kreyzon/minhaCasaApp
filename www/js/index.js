@@ -82,4 +82,5 @@ var showRegisterButton = document.querySelector('#show-register');
 
   showDoLoginButton.addEventListener('click', function() {
       dialogLoading.showModal();
+      setTimeout(function () {}, 1000);
   });

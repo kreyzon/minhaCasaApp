@@ -15,6 +15,13 @@ var listaCategorias;
 var listaProdutos;
 var listaItensCompras;
 
+function checarLogin(){
+  if(window.sessionStorage.getItem('usuario')){
+    document.getElementById("nav-login").style.display = "none";
+    document.getElementById("nav-logout").style.display = "block";
+    document.getElementById("config").innerHTML = "<i class='material-icons md-48'>settings</i>"+window.sessionStorage.getItem('usuario');
+  }
+}
 function logar(){
     login = document.getElementById("login").value;
     senha = document.getElementById("senha").value;
@@ -38,6 +45,8 @@ function logar(){
                 listaItensCompras = s.val();
                 console.log(listaItensCompras);
               });
+          document.getElementById("nav-login").style.display = "none";
+          document.getElementById("nav-logout").style.display = "block";
           dialog.close();
           dialogLoading.close();
         }else{
