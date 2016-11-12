@@ -16,7 +16,8 @@ var listaProdutos;
 var listaItensCompras;
 
 function logar(){
-    document.getElementById("progresso").style.display = "block";
+    dialog.close();
+    dialogLoading.showModal();
     login = document.getElementById("login").value;
     senha = document.getElementById("senha").value;
     userDAO = firebaseConnection.database().ref('/users/'+login);
@@ -41,13 +42,14 @@ function logar(){
               });
           dialog.close();
         }else{
+            dialog.showModal();
             console.log("USER NOT ENCONTRADO");
         }
 
     }, function(error) {
       console.error(error);
     });
-    document.getElementById("progresso").style.display = "none";
+    dialogLoading.close();
 }
 
 function pesquisarCategoriaById(id){

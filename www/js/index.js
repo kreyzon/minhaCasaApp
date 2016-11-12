@@ -73,3 +73,8 @@ var showRegisterButton = document.querySelector('#show-register');
   dialogRegister.querySelector('.close').addEventListener('click', function() {
     dialogRegister.close();
   });
+
+  var dialogLoading = document.querySelector('#loading-dialog');
+  if (! dialogLoading.showModal) {
+    dialogPolyfill.registerDialog(dialogLoading);
+  }

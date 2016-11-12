@@ -51,7 +51,7 @@
                           </div>
                           <div class="mdl-card__supporting-text">
                               <div class="mdl-grid">
-                                      <div class="mdl-cell mdl-cell--10-col-desktop mdl-cell--12-col-phone">
+                                      <div class="mdl-cell mdl-cell--12">
                                           <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
                                             <thead>
                                               <tr>
@@ -75,7 +75,7 @@
                                             </tbody>
                                           </table>
                                       </div>
-                                      <div class="mdl-cell mdl-cell--2-col-desktop mdl-cell--12-col-phone">
+                                      <div class="mdl-cell mdl-cell--12">
                                           <button class="mdl-button mdl-js-button mdl-button--fab">
                                               <div class="icon_cart">
                                               </div>
@@ -86,13 +86,13 @@
                                             <button class="mdl-button mdl-js-button mdl-button--fab">
                                               <i class="material-icons md-48">assignment</i>
                                             </button>
-                                            <button id="demo-menu-top-right"
+                                            <button id="demo-menu"
                                                     class="mdl-button mdl-js-button mdl-button--icon">
                                               <i class="material-icons">more_vert</i>
                                             </button>
 
-                                            <ul class="mdl-menu mdl-menu--top-left mdl-js-menu mdl-js-ripple-effect"
-                                                data-mdl-for="demo-menu-top-right">
+                                            <ul class="mdl-menu mdl-menu--top-right mdl-js-menu mdl-js-ripple-effect"
+                                                data-mdl-for="demo-menu">
                                               <li class="mdl-menu__item">Some Action</li>
                                               <li class="mdl-menu__item">Another Action</li>
                                               <li class="mdl-menu__item">Yet Another Action</li>
@@ -168,6 +168,11 @@
           </main>
         </div>
 
+        <dialog id="loading-dialog" style="border:none;background-color:transparent">
+                <div class="mdl-spinner mdl-js-spinner mdl-spinner--single-color is-active"></div>
+            </div>
+        </dialog>
+
         <dialog id="login-dialog" class="mdl-dialog">
             <h4 class="mdl-dialog__title">Sign-in!</h4>
             <div class="mdl-dialog__content">
@@ -182,9 +187,7 @@
             </div>
             <div class="mdl-dialog__actions">
               <button type="button" class="mdl-button close">Cancelar</button>
-              <div id="progresso" class="mdl-spinner mdl-js-spinner mdl-spinner--single-color is-active" style="z-index:999;left:10%; position:absolute;display:none"></div>
               <input onclick="logar();" class="get-app mdl-button mdl-button--raised mdl-button--colored mdl-js-button mdl-js-ripple-effect" type="button" value="Logar"/>
-
             </div>
         </dialog>
 
