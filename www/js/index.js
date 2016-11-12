@@ -78,3 +78,8 @@ var showRegisterButton = document.querySelector('#show-register');
   if (! dialogLoading.showModal) {
     dialogPolyfill.registerDialog(dialogLoading);
   }
+  var showDoLoginButton = document.querySelector('#do-login');
+
+  showDoLoginButton.addEventListener('click', function() {
+      dialogLoading.showModal();
+  });

@@ -16,8 +16,6 @@ var listaProdutos;
 var listaItensCompras;
 
 function logar(){
-    dialog.close();
-    dialogLoading.showModal();
     login = document.getElementById("login").value;
     senha = document.getElementById("senha").value;
     userDAO = firebaseConnection.database().ref('/users/'+login);
@@ -41,15 +39,15 @@ function logar(){
                 console.log(listaItensCompras);
               });
           dialog.close();
+          dialogLoading.close();
         }else{
-            dialog.showModal();
             console.log("USER NOT ENCONTRADO");
+            dialogLoading.close();
         }
 
     }, function(error) {
       console.error(error);
     });
-    dialogLoading.close();
 }
 
 function pesquisarCategoriaById(id){
