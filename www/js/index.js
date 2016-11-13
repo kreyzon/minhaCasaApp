@@ -61,26 +61,13 @@ var showDialogButton = document.querySelector('#show-login');
    dialog.querySelector('.close').addEventListener('click', function() {
      dialog.close();
    });
-
-var dialogRegister = document.querySelector('#register-dialog');
-var showRegisterButton = document.querySelector('#show-register');
-  if (! dialogRegister.showModal) {
-    dialogPolyfill.registerDialog(dialog);
-  }
-  showRegisterButton.addEventListener('click', function() {
-    dialogRegister.showModal();
-  });
-  dialogRegister.querySelector('.close').addEventListener('click', function() {
-    dialogRegister.close();
-  });
-
-  var dialogLoading = document.querySelector('#loading-dialog');
-  if (! dialogLoading.showModal) {
+var dialogLoading = document.querySelector('#loading-dialog');
+if (! dialogLoading.showModal) {
     dialogPolyfill.registerDialog(dialogLoading);
-  }
-  var showDoLoginButton = document.querySelector('#do-login');
+}
+var showDoLoginButton = document.querySelector('#do-login');
 
-  showDoLoginButton.addEventListener('click', function() {
-      dialogLoading.showModal();
-      setTimeout(function () {}, 1000);
-  });
+showDoLoginButton.addEventListener('click', function() {
+  dialogLoading.showModal();
+  setTimeout(function () {}, 1000);
+});
