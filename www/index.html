@@ -10,7 +10,7 @@
         <link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.deep_purple-red.min.css" />
         <script defer src="https://code.getmdl.io/1.2.1/material.min.js"></script>
         <script src="http://www.w3schools.com/lib/w3data.js"></script>
-        <title>Teste Incrível</title>
+        <title>Minha Casa, Meu App</title>
     </head>
     <body onload="checarLogin();">
         <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
@@ -40,7 +40,7 @@
             </div>
           </header>
           <div class="mdl-layout__drawer">
-            <span class="mdl-layout-title">Cadastros</span>
+            <span class="mdl-layout-title"><a class="mdl-navigation__link" href="#" onclick="nav('index')">Home</a></span>
             <nav class="mdl-navigation">
               <a class="mdl-navigation__link" href="#" onclick="nav('produtos')">Produtos</a>
               <a class="mdl-navigation__link" href="">Categorias</a>
@@ -49,130 +49,120 @@
             </nav>
           </div>
           <main class="mdl-layout__content">
-
               <div id="content" class="page-content">
-                <div class="mdl-grid">
-                    <div class="mdl-cell mdl-cell--6-col">
-                        <div class="shop-card mdl-card  mdl-shadow--6dp">
-                          <div class="mdl-card__title">
-                              Lista de Compras
-                          </div>
-                          <div class="mdl-card__supporting-text">
-                              <div class="mdl-grid">
-                                      <div class="mdl-cell mdl-cell--12">
-                                          <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
-                                            <thead>
-                                              <tr>
-                                                <th class="mdl-data-table__cell--non-numeric">Produto</th>
-                                                <th>Quantidade</th>
-                                              </tr>
-                                            </thead>
-                                            <tbody id="table_lista_compra">
-                                              <tr>
-                                                <td class="mdl-data-table__cell--non-numeric">Pão</td>
-                                                <td>6</td>
-                                              </tr>
-                                              <tr>
-                                                <td class="mdl-data-table__cell--non-numeric">Leite</td>
-                                                <td>4</td>
-                                              </tr>
-                                              <tr>
-                                                <td class="mdl-data-table__cell--non-numeric">Ração</td>
-                                                <td>1</td>
-                                              </tr>
-                                            </tbody>
-                                          </table>
-                                      </div>
-                                      <div class="mdl-cell mdl-cell--12">
-                                          <button class="mdl-button mdl-js-button mdl-button--fab">
-                                              <div class="icon_cart">
-                                              </div>
-                                            </button>
-                                          <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored">
-                                              <i class="material-icons">add</i>
-                                            </button>
+                  <div class="mdl-grid">
+                      <div class="mdl-cell mdl-cell--6-col">
+                          <div class="shop-card mdl-card  mdl-shadow--6dp">
+                            <div class="mdl-card__title">
+                                Lista de Compras
+                            </div>
+                            <div class="mdl-card__supporting-text">
+                                <div class="mdl-grid">
+                                        <div class="mdl-cell mdl-cell--12">
+                                            <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp" style="font-size:15px">
+                                              <thead>
+                                                <tr>
+                                                  <th class="mdl-data-table__cell--non-numeric" >Categoria</th>
+                                                  <th class="mdl-data-table__cell--non-numeric">Produto</th>
+                                                  <th>Quant.</th>
+                                                </tr>
+                                              </thead>
+                                              <tbody id="table_lista_compra">
+
+                                              </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="mdl-cell mdl-cell--12">
                                             <button class="mdl-button mdl-js-button mdl-button--fab">
-                                              <i class="material-icons md-48">assignment</i>
-                                            </button>
-                                            <button id="demo-menu"
-                                                    class="mdl-button mdl-js-button mdl-button--icon">
-                                              <i class="material-icons">more_vert</i>
-                                            </button>
+                                                <div class="icon_cart">
+                                                </div>
+                                              </button>
+                                            <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored">
+                                                <i class="material-icons">add</i>
+                                              </button>
+                                              <button class="mdl-button mdl-js-button mdl-button--fab">
+                                                <i class="material-icons md-48">assignment</i>
+                                              </button>
+                                              <button id="demo-menu"
+                                                      class="mdl-button mdl-js-button mdl-button--icon">
+                                                <i class="material-icons">more_vert</i>
+                                              </button>
 
-                                            <ul class="mdl-menu mdl-menu--top-right mdl-js-menu mdl-js-ripple-effect"
-                                                data-mdl-for="demo-menu">
-                                              <li class="mdl-menu__item">Some Action</li>
-                                              <li class="mdl-menu__item">Another Action</li>
-                                              <li class="mdl-menu__item">Yet Another Action</li>
-                                            </ul>
+                                              <ul class="mdl-menu mdl-menu--top-right mdl-js-menu mdl-js-ripple-effect"
+                                                  data-mdl-for="demo-menu">
+                                                <li class="mdl-menu__item">Some Action</li>
+                                                <li class="mdl-menu__item">Another Action</li>
+                                                <li class="mdl-menu__item">Yet Another Action</li>
+                                              </ul>
+                                        </div>
+                                  </div>
+                            </div>
+                          </div>
+                      </div>
+                      <div class="mdl-cell mdl-cell--6-col">
+                          <div class="bill-card mdl-card  mdl-shadow--6dp">
+                            <div class="mdl-card__title">
+                            </div>
+                            <div class="mdl-card__supporting-text">
+                                <div class="mdl-grid">
+                                      <div class="mdl-cell mdl-cell--10-col">
+                                        <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
+                                          <thead>
+                                            <tr>
+                                              <th class="mdl-data-table__cell--non-numeric">Conta</th>
+                                              <th>Vencimento</th>
+                                              <th>Valor</th>
+                                            </tr>
+                                          </thead>
+                                          <tbody>
+                                          <tr>
+                                            <td class="mdl-data-table__cell--non-numeric">Condomínio</td>
+                                            <td>10/11/2016</td>
+                                            <td>200.00</td>
+                                          </tr>
+                                          <tr>
+                                            <td class="mdl-data-table__cell--non-numeric">Internet</td>
+                                            <td>10/11/2016</td>
+                                            <td>65.00</td>
+                                          </tr>
+                                            <tr>
+                                              <td class="mdl-data-table__cell--non-numeric">Energia</td>
+                                              <td>14/11/2016</td>
+                                              <td>72.90</td>
+                                            </tr>
+                                          </tbody>
+                                        </table>
                                       </div>
-                                </div>
-                          </div>
-                        </div>
-                    </div>
-                    <div class="mdl-cell mdl-cell--6-col">
-                        <div class="bill-card mdl-card  mdl-shadow--6dp">
-                          <div class="mdl-card__title">
-                          </div>
-                          <div class="mdl-card__supporting-text">
-                              <div class="mdl-grid">
-                                    <div class="mdl-cell mdl-cell--10-col">
-                                      <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
-                                        <thead>
-                                          <tr>
-                                            <th class="mdl-data-table__cell--non-numeric">Conta</th>
-                                            <th>Vencimento</th>
-                                            <th>Valor</th>
-                                          </tr>
-                                        </thead>
-                                        <tbody>
-                                        <tr>
-                                          <td class="mdl-data-table__cell--non-numeric">Condomínio</td>
-                                          <td>10/11/2016</td>
-                                          <td>200.00</td>
-                                        </tr>
-                                        <tr>
-                                          <td class="mdl-data-table__cell--non-numeric">Internet</td>
-                                          <td>10/11/2016</td>
-                                          <td>65.00</td>
-                                        </tr>
-                                          <tr>
-                                            <td class="mdl-data-table__cell--non-numeric">Energia</td>
-                                            <td>14/11/2016</td>
-                                            <td>72.90</td>
-                                          </tr>
-                                        </tbody>
-                                      </table>
-                                    </div>
-                                    <div class="mdl-cell mdl-cell--2-col mdl-cell--middle">
-                                        <button class="mdl-button mdl-js-button mdl-button--fab icon_cashmachine">
-                                            <div class="icon_cashmachine">
-                                            </div>
-                                        </button>
-                                        <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored">
-                                          <i class="material-icons md-48">add</i>
-                                        </button>
-                                        <button class="mdl-button mdl-js-button mdl-button--fab">
-                                          <i class="material-icons md-48">assignment</i>
-                                        </button>
-                                        <button id="demo-menu-top-left"
-                                                class="mdl-button mdl-js-button mdl-button--icon">
-                                          <i class="material-icons">more_vert</i>
-                                        </button>
+                                      <div class="mdl-cell mdl-cell--2-col mdl-cell--middle">
+                                          <button class="mdl-button mdl-js-button mdl-button--fab icon_cashmachine">
+                                              <div class="icon_cashmachine">
+                                              </div>
+                                          </button>
+                                          <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored">
+                                            <i class="material-icons md-48">add</i>
+                                          </button>
+                                          <button class="mdl-button mdl-js-button mdl-button--fab">
+                                            <i class="material-icons md-48">assignment</i>
+                                          </button>
+                                          <button id="demo-menu-top-left"
+                                                  class="mdl-button mdl-js-button mdl-button--icon">
+                                            <i class="material-icons">more_vert</i>
+                                          </button>
 
-                                        <ul class="mdl-menu mdl-menu--top-left mdl-js-menu mdl-js-ripple-effect"
-                                            data-mdl-for="demo-menu-top-left">
-                                          <li class="mdl-menu__item">Some Action</li>
-                                          <li class="mdl-menu__item">Another Action</li>
-                                          <li class="mdl-menu__item">Yet Another Action</li>
-                                        </ul>
-                                    </div>
-                                </div>
+                                          <ul class="mdl-menu mdl-menu--top-left mdl-js-menu mdl-js-ripple-effect"
+                                              data-mdl-for="demo-menu-top-left">
+                                            <li class="mdl-menu__item">Some Action</li>
+                                            <li class="mdl-menu__item">Another Action</li>
+                                            <li class="mdl-menu__item">Yet Another Action</li>
+                                          </ul>
+                                      </div>
+                                  </div>
+                            </div>
                           </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                      </div>
+                  </div>
+
+              </div>
           </main>
         </div>
 

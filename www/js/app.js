@@ -16,6 +16,7 @@ var listaProdutos;
 var listaItensCompras;
 
 function checarLogin(){
+    dialogLoading.showModal();
     if(window.sessionStorage.getItem('usuario') && window.sessionStorage.getItem('base')){
         document.getElementById("nav-login").style.display = "none";
         document.getElementById("nav-logout").style.display = "block";
@@ -26,22 +27,26 @@ function checarLogin(){
         categoriaDAO.once('value').then(function(s) {
             listaCategorias = s.val();
             console.log(listaCategorias);
-          });
-        produtoDAO = firebaseConnection.database().ref('/'+base+'/produtos/');
-        produtoDAO.once('value').then(function(s) {
-          listaProdutos = s.val();
-          console.log(listaProdutos);
-        });
-        itemCompraDAO = firebaseConnection.database().ref('/'+base+'/itens_compras/');
-        itemCompraDAO.once('value').then(function(s) {
-            listaItensCompras = s.val();
-            console.log(listaItensCompras);
-          });
-        // montando a View
-        montarListaCompras();
+        }).then(function(s) {
+                produtoDAO = firebaseConnection.database().ref('/'+base+'/produtos/');
+                produtoDAO.once('value').then(function(s) {
+                  listaProdutos = s.val();
+                  console.log(listaProdutos);
+              }).then(function(s) {
+                        itemCompraDAO = firebaseConnection.database().ref('/'+base+'/itens_compras/');
+                        itemCompraDAO.once('value').then(function(s) {
+                            listaItensCompras = s.val();
+                            console.log(listaItensCompras);
+                        }).then(function(s) {
+                        // montando a View
+                        montarListaCompras();
+                        })
+                    })
+                });
     }else{
         document.getElementById("nav-login").style.display = "block";
         document.getElementById("nav-logout").style.display = "none";
+        dialogLoading.close();
     }
 }
 
@@ -71,25 +76,54 @@ function deslogar(){
 }
 function pesquisarCategoriaById(id){
     c = categoriaDAO.child(id);
-    c.once('value').then(function(snapshot) {
+    return c.once('value', function(snapshot) {
         return snapshot.val();
     });
 }
 
 function pesquisarProdutoById(id){
     p = produtoDAO.child(id);
-    p.once('value').then(function(snapshot) {
+    return p.once('value', function(snapshot) {
         return snapshot.val();
     });
 }
 
 function pesquisarItemCompraById(id){
     i = itemCompraDAO.child(id);
-    i.once('value').then(function(snapshot) {
+    return i.once('value', function(snapshot) {
         return snapshot.val();
     });
 }
 
 function montarListaCompras(){
     tabela = document.getElementById("table_lista_compra");
+    console.log(listaItensCompras);
+    for (i in listaItensCompras){
+        console.log(i);
+        pesquisarItemCompraById(i).then(function(snapshot) {
+            item = snapshot.val();
+            var tdQtd = document.createElement('td');
+            tdQtd.appendChild(document.createTextNode(item.qtd));
+            var tr = document.createElement('tr');
+            pesquisarProdutoById(item.id_produto).then(function(snapshot) {
+                    var tdProduto = document.createElement('td');
+                    tdProduto.class="mdl-data-table__cell--non-numeric";
+                    tdProduto.appendChild(document.createTextNode(snapshot.val().descricao));
+                    pesquisarCategoriaById(snapshot.val().id_categoria).then(function(snapshot) {
+                        var tdCategoria = document.createElement('td');
+                        // var tdCategoriaContent = document.createElement('td');
+                        tdCategoria.style.borderRadius= "50%";
+                        tdCategoria.style.textAlign="center";
+                        tdCategoria.style.color = snapshot.val().cor;
+                        tdCategoria.appendChild(document.createTextNode(snapshot.val().descricao));
+                        tr.appendChild(tdCategoria);
+                        tr.appendChild(tdProduto);
+                        tr.appendChild(tdQtd);
+                        tabela.appendChild(tr);
+                    });
+            });;
+            }
+        );
+    }
+    dialogLoading.close();
 }
