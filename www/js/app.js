@@ -16,7 +16,6 @@ var listaProdutos;
 var listaItensCompras;
 
 function checarLogin(){
-    dialogLoading.showModal();
     if(window.sessionStorage.getItem('usuario') && window.sessionStorage.getItem('base')){
         document.getElementById("nav-login").style.display = "none";
         document.getElementById("nav-logout").style.display = "block";
@@ -46,7 +45,9 @@ function checarLogin(){
     }else{
         document.getElementById("nav-login").style.display = "block";
         document.getElementById("nav-logout").style.display = "none";
-        dialogLoading.close();
+        if (dialogLoading.open) {
+            dialogLoading.close();
+        }
     }
 }
 
@@ -60,10 +61,14 @@ function logar(){
             window.sessionStorage.setItem('base', snapshot.val().base);
             checarLogin();
             dialog.close();
-            dialogLoading.close();
+            if (dialogLoading.open) {
+                dialogLoading.close();
+            }
         }else{
             console.log("USER NOT ENCONTRADO");
-            dialogLoading.close();
+            if (dialogLoading.open) {
+                dialogLoading.close();
+            }
         }
     }, function(error) {
       console.error(error);
@@ -97,7 +102,6 @@ function pesquisarItemCompraById(id){
 
 function montarListaCompras(){
     tabela = document.getElementById("table_lista_compra");
-    console.log(listaItensCompras);
     for (i in listaItensCompras){
         console.log(i);
         pesquisarItemCompraById(i).then(function(snapshot) {
@@ -125,5 +129,7 @@ function montarListaCompras(){
             }
         );
     }
-    dialogLoading.close();
+    if (dialogLoading.open) {
+        dialogLoading.close();
+    }
 }
