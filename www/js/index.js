@@ -49,7 +49,7 @@ var app = {
 };
 
 app.initialize();
-
+/*modal de login*/
 var dialog = document.querySelector('#login-dialog');
 var showDialogButton = document.querySelector('#show-login');
    if (! dialog.showModal) {
@@ -61,6 +61,8 @@ var showDialogButton = document.querySelector('#show-login');
    dialog.querySelector('.close').addEventListener('click', function() {
      dialog.close();
    });
+
+/*modal de loading*/
 var dialogLoading = document.querySelector('#loading-dialog');
 if (! dialogLoading.showModal) {
     dialogPolyfill.registerDialog(dialogLoading);
@@ -70,4 +72,18 @@ var showDoLoginButton = document.querySelector('#do-login');
 showDoLoginButton.addEventListener('click', function() {
   dialogLoading.showModal();
   setTimeout(function () {}, 1000);
+});
+
+/*modal de incluir itens lista compra*/
+var dialogItemCompra = document.querySelector('#itemcompra-dialog');
+if (! dialogItemCompra.showModal) {
+    dialogPolyfill.registerDialog(dialogItemCompra);
+}
+var showAddItemCompraButton = document.querySelector('#btAddItemCompra');
+showAddItemCompraButton.addEventListener('click', function() {
+  dialogItemCompra.showModal();
+});
+
+dialogItemCompra.querySelector('.close').addEventListener('click', function() {
+  dialogItemCompra.close();
 });

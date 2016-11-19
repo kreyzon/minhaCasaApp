@@ -85,7 +85,11 @@ function pesquisarCategoriaById(id){
         return snapshot.val();
     });
 }
-
+function pesquisarCategoriaByDescricao(descricao){
+    categoriaDAO.orderByValue().startAt(descricao).on("child_added", function(snapshot) {
+      console.log(snapshot.val())
+    });
+}
 function pesquisarProdutoById(id){
     p = produtoDAO.child(id);
     return p.once('value', function(snapshot) {
@@ -132,4 +136,9 @@ function montarListaCompras(){
     if (dialogLoading.open) {
         dialogLoading.close();
     }
+}
+
+function montarSelectCategoria(obj){
+    console.log(obj.value);
+    pesquisarCategoriaByDescricao(obj.value);
 }
