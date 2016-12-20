@@ -25,17 +25,14 @@ function checarLogin(){
         categoriaDAO = firebaseConnection.database().ref('/'+base+'/categorias/');
         categoriaDAO.once('value').then(function(s) {
             listaCategorias = s.val();
-            console.log(listaCategorias);
         }).then(function(s) {
                 produtoDAO = firebaseConnection.database().ref('/'+base+'/produtos/');
                 produtoDAO.once('value').then(function(s) {
                   listaProdutos = s.val();
-                  console.log(listaProdutos);
               }).then(function(s) {
                         itemCompraDAO = firebaseConnection.database().ref('/'+base+'/itens_compras/');
                         itemCompraDAO.once('value').then(function(s) {
                             listaItensCompras = s.val();
-                            console.log(listaItensCompras);
                         }).then(function(s) {
                         // montando a View
                         montarListaCompras();
@@ -85,11 +82,57 @@ function pesquisarCategoriaById(id){
         return snapshot.val();
     });
 }
-function pesquisarCategoriaByDescricao(descricao){
-    categoriaDAO.orderByValue().startAt(descricao).on("child_added", function(snapshot) {
-      console.log(snapshot.val())
+function pesquisarCategoriaById(id){
+    c = categoriaDAO.child(id);
+    return c.once('value', function(snapshot) {
+        return snapshot.val();
     });
 }
+function pesquisarCategoriaByDescricao(descricao){
+    return categoriaDAO.orderByChild("descricao").equalTo(descricao).once('value').then( function(snapshot) {
+      return snapshot.val();
+  });
+}
+function carregarCategorias(){
+    dataList = document.getElementById("listaCategorias");
+    for (c in listaCategorias) {
+        pesquisarCategoriaById(c).then(function(snapshot) {
+            item = snapshot.val();
+            var option = document.createElement('option');
+            option.value = item.descricao;
+            dataList.appendChild(option);
+        });
+    }
+}
+
+function carregarProdutosPorCategoria(){
+    ip = document.getElementById("ipCategoria");
+    dataList = document.getElementById("listaProdutos");
+    categoriaSelecionadaP = pesquisarCategoriaByDescricao(ip.value);
+    while (dataList.hasChildNodes()) {
+        dataList.removeChild(dataList.firstChild);
+    }
+    categoriaSelecionadaP.then(function(categoriaSelecionada){
+        for(x in categoriaSelecionada){
+            this.categoriaSelecionada = x;
+            break;
+        }
+        console.log(this.categoriaSelecionada);
+        for (p in listaProdutos) {
+            console.log(p);
+            pesquisarProdutoById(p).then(function(snapshot) {
+                item = snapshot.val();
+                if(item.id_categoria == this.categoriaSelecionada){
+                    var option = document.createElement('option');
+                    option.value = item.descricao;
+                    dataList.appendChild(option);
+                    console.log(dataList);
+                }
+            });
+        }
+    });
+}
+
 function pesquisarProdutoById(id){
     p = produtoDAO.child(id);
     return p.once('value', function(snapshot) {
@@ -107,7 +150,6 @@ function pesquisarItemCompraById(id){
 function montarListaCompras(){
     tabela = document.getElementById("table_lista_compra");
     for (i in listaItensCompras){
-        console.log(i);
         pesquisarItemCompraById(i).then(function(snapshot) {
             item = snapshot.val();
             var tdQtd = document.createElement('td');

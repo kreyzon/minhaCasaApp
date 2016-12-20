@@ -198,11 +198,15 @@
             <h4  class="mdl-dialog__title">O que está faltando?</h4>
             <div class="mdl-dialog__content">
                     <div class="mdl-textfield mdl-js-textfield ">
-                        <input id="ipCategoria" class="mdl-textfield__input" onkeyup="montarSelectCategoria(this);">
+                        <input id="ipCategoria" class="mdl-textfield__input" list="listaCategorias" onchange="carregarProdutosPorCategoria();">
+                        <datalist id="listaCategorias">
+                        </datalist>
                         <label class="mdl-textfield__label" for="ipCategoria" >Categoria</label>
                     </div>
                      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                         <input id="ipProduto" class="mdl-textfield__input">
+                         <input id="ipProduto" class="mdl-textfield__input" list="listaProdutos">
+                         <datalist id="listaProdutos">
+                         </datalist>
                          <label class="mdl-textfield__label" for="ipProduto">Produto</label>
                      </div>
                      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">

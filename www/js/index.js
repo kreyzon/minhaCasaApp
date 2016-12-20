@@ -81,6 +81,7 @@ if (! dialogItemCompra.showModal) {
 }
 var showAddItemCompraButton = document.querySelector('#btAddItemCompra');
 showAddItemCompraButton.addEventListener('click', function() {
+    carregarCategorias();
   dialogItemCompra.showModal();
 });
 
