@@ -204,7 +204,7 @@
                         <label class="mdl-textfield__label" for="ipCategoria" >Categoria</label>
                     </div>
                      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                         <input id="ipProduto" class="mdl-textfield__input" list="listaProdutos">
+                         <input id="ipProduto" oninput="setarModelValue(this)" class="mdl-textfield__input" list="listaProdutos">
                          <datalist id="listaProdutos">
                          </datalist>
                          <label class="mdl-textfield__label" for="ipProduto">Produto</label>
@@ -217,7 +217,7 @@
             </div>
             <div class="mdl-dialog__actions">
                 <button type="button" class="mdl-button mdl-button--raised mdl-button--accent close">Cancelar</button>
-                <input class="get-app mdl-button mdl-button--raised mdl-button--colored mdl-js-button mdl-js-ripple-effect" type="button" value="Incluir"/>
+                <input id="incluir-itemcompra" class="get-app mdl-button mdl-button--raised mdl-button--colored mdl-js-button mdl-js-ripple-effect" type="button" value="Incluir"/>
             </div>
         </dialog>
 

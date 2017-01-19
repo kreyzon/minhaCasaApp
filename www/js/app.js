@@ -117,16 +117,17 @@ function carregarProdutosPorCategoria(){
             this.categoriaSelecionada = x;
             break;
         }
-        console.log(this.categoriaSelecionada);
         for (p in listaProdutos) {
-            console.log(p);
             pesquisarProdutoById(p).then(function(snapshot) {
                 item = snapshot.val();
                 if(item.id_categoria == this.categoriaSelecionada){
                     var option = document.createElement('option');
-                    option.value = item.descricao;
+                    var att = document.createAttribute("modelvalue");
+                    att.value = item.id;
+                    option.setAttributeNode(att);
+                    option.text = item.descricao;
                     dataList.appendChild(option);
-                    console.log(dataList);
+                    dataList.setAttributeNode(att);
                 }
             });
         }
@@ -138,6 +139,12 @@ function pesquisarProdutoById(id){
     return p.once('value', function(snapshot) {
         return snapshot.val();
     });
+}
+
+function pesquisarProdutosByDescricao(descricao){
+    return produtoDAO.orderByChild("descricao").equalTo(descricao).once('value').then( function(snapshot) {
+      return snapshot.val();
+  });
 }
 
 function pesquisarItemCompraById(id){
@@ -183,4 +190,33 @@ function montarListaCompras(){
 function montarSelectCategoria(obj){
     console.log(obj.value);
     pesquisarCategoriaByDescricao(obj.value);
+}
+
+function setarModelValue(element){
+    var val = element.value;
+    var opts = element.list.childNodes;
+    for (var i = 0; i < opts.length; i++) {
+        if (opts[i].value === val) {
+        document.getElementById("ipProduto").setAttribute("modelvalue", opts[i].getAttribute("modelvalue"));
+        break;
+     }
+   }
+}
+
+function incluirItemCompra(){
+    var idProduto = document.getElementById("ipProduto").getAttribute("modelvalue");
+    pesquisarProdutoById(idProduto).then(function(snapshot) {
+        var produto = snapshot.val();
+        var quantidadeItemCompra = document.getElementById("ipQuantidade").value;
+        console.log(quantidadeItemCompra);
+        console.log(produto.id);
+        var itemCompraData = {
+            comprado: false,
+            data_lancamento: "2017-01-17",
+            id_produto: produto.id,
+            qtd : quantidadeItemCompra
+        };
+        var newKey = itemCompraDAO.push().key;
+        itemCompraDAO.child(newKey).set(itemCompraData);
+    });
 }

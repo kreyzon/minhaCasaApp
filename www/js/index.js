@@ -88,3 +88,9 @@ showAddItemCompraButton.addEventListener('click', function() {
 dialogItemCompra.querySelector('.close').addEventListener('click', function() {
   dialogItemCompra.close();
 });
+// Incluir ItemCompra
+var incluirItemCompraButton = document.querySelector('#incluir-itemcompra');
+
+incluirItemCompraButton.addEventListener('click', function() {
+  incluirItemCompra();
+});
