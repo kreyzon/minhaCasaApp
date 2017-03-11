@@ -12,18 +12,14 @@
         <script src="http://www.w3schools.com/lib/w3data.js"></script>
         <title>Minha Casa, Meu App</title>
     </head>
-    <body onload="checarLogin();">
+    <body>
         <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
           <header class="mdl-layout__header mdl-layout__header--scroll">
             <div class="mdl-layout__header-row">
               <span class="mdl-layout-title">Minha Casa</span>
               <div class="mdl-layout-spacer"></div>
               <nav id="nav-login" class="mdl-navigation">
-                <li id="show-login" class="mdl-navigation__link">
-                    <button class="mdl-button mdl-js-button mdl-button--colored mdl-button--raised mdl-js-ripple-effect">
-                      Entrar
-                    </button>
-                </li>
+
               </nav>
               <nav id="nav-logout" class="mdl-navigation" style="display:none">
                 <li id="show-config" class="mdl-navigation__link">
@@ -34,7 +30,7 @@
                 <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
                     data-mdl-for="config">
                   <li class="mdl-menu__item  mdl-menu__item--full-bleed-divider">Preferências</li>
-                  <li class="mdl-menu__item" onclick="deslogar();">Logout</li>
+                  <li class="mdl-menu__item" onclick="toggleSignIn();">Logout</li>
                 </ul>
               </nav>
             </div>
@@ -49,7 +45,25 @@
             </nav>
           </div>
           <main class="mdl-layout__content">
-              <div id="content" class="page-content">
+              <div id="login-content" class="mdl-grid">
+                   <div class="mdl-cell mdl-cell--12-col">
+                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                         <input id="login" type="text" class="mdl-textfield__input">
+                         <label class="mdl-textfield__label" for="login">Login</label>
+                     </div>
+                   </div>
+                   <div class="mdl-cell mdl-cell--12-col">
+                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                         <input id="senha" type="password" class="mdl-textfield__input">
+                         <label class="mdl-textfield__label" for="senha">Senha</label>
+                     </div>
+                   </div>
+                    <div class="mdl-cell mdl-cell--6-col">
+                      <input id="do-login" onclick="toggleSignIn();" class="get-app mdl-button mdl-button--raised mdl-button--colored mdl-js-button mdl-js-ripple-effect" type="button" value="Logar"/>
+                      <button id="show-login" class="mdl-button mdl-js-button mdl-button--colored mdl-button--raised mdl-js-ripple-effect">Registrar</button>
+                    </div>
+               </div>
+              <div id="content" class="page-content" style="display:none">
                   <div class="mdl-grid">
                       <div class="mdl-cell mdl-cell--6-col">
                           <div class="shop-card mdl-card  mdl-shadow--6dp">
@@ -171,26 +185,32 @@
         </dialog>
 
         <dialog id="login-dialog" class="mdl-dialog">
-            <h4  class="mdl-dialog__title">Acesse!</h4>
+            <h4  class="mdl-dialog__title">Registre-se!</h4>
             <div class="mdl-dialog__content">
-               <div class="mdl-grid">
-                    <div class="mdl-cell mdl-cell--12-col">
-                      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                          <input id="login" type="text" class="mdl-textfield__input">
-                          <label class="mdl-textfield__label" for="login">Login</label>
-                      </div>
-                    </div>
-                    <div class="mdl-cell mdl-cell--12-col">
-                      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                          <input id="senha" type="password" class="mdl-textfield__input">
-                          <label class="mdl-textfield__label" for="senha">Senha</label>
-                      </div>
-                    </div>
-                     <div class="mdl-cell mdl-cell--6-col">
-                       <input id="do-login" onclick="logar();" class="get-app mdl-button mdl-button--raised mdl-button--colored mdl-js-button mdl-js-ripple-effect" type="button" value="Logar"/>
-                       <button type="button" class="mdl-button mdl-button--raised mdl-button--accent close">Cancelar</button>
-                     </div>
-                </div>
+                <div class="mdl-grid">
+                                  <div class="mdl-cell mdl-cell--12-col">
+                                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                        <input id="new-nome" type="text" class="mdl-textfield__input">
+                                        <label class="mdl-textfield__label" for="new-nome">Nome</label>
+                                    </div>
+                                  </div>
+                                  <div class="mdl-cell mdl-cell--12-col">
+                                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                        <input id="new-login" type="text" class="mdl-textfield__input">
+                                        <label class="mdl-textfield__label" for="login">Email</label>
+                                    </div>
+                                  </div>
+                                  <div class="mdl-cell mdl-cell--12-col">
+                                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                        <input id="new-senha" type="password" class="mdl-textfield__input">
+                                        <label class="mdl-textfield__label" for="senha">Senha</label>
+                                    </div>
+                                  </div>
+                                   <div class="mdl-cell mdl-cell--6-col">
+                                     <input onclick="handleSignUp();" class="get-app mdl-button mdl-button--raised mdl-button--colored mdl-js-button mdl-js-ripple-effect" type="button" value="Criar"/>
+                                     <button type="button" class="mdl-button mdl-button--raised mdl-button--accent close">Cancelar</button>
+                                   </div>
+                              </div>
             </div>
         </dialog>
 
@@ -224,6 +244,7 @@
         <script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript" src="js/firebase.js"></script>
         <script type="text/javascript" src="js/app.js"></script>
+        <script type="text/javascript" src="js/auth.js"></script>
         <script type="text/javascript" src="js/nav.js"></script>
     </body>
 </html>

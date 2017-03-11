@@ -16,7 +16,7 @@ var listaProdutos;
 var listaItensCompras;
 
 function checarLogin(){
-    if(window.sessionStorage.getItem('usuario') && window.sessionStorage.getItem('base')){
+    if(window.sessionStorage.getItem('base')){
         document.getElementById("nav-login").style.display = "none";
         document.getElementById("nav-logout").style.display = "block";
         document.getElementById("config").innerHTML = window.sessionStorage.getItem('usuario');
@@ -106,32 +106,34 @@ function carregarCategorias(){
 }
 
 function carregarProdutosPorCategoria(){
+    this.categoriaSelecionada = null;
     ip = document.getElementById("ipCategoria");
     dataList = document.getElementById("listaProdutos");
     categoriaSelecionadaP = pesquisarCategoriaByDescricao(ip.value);
+
     while (dataList.hasChildNodes()) {
         dataList.removeChild(dataList.firstChild);
-    }
+    };
     categoriaSelecionadaP.then(function(categoriaSelecionada){
-        for(x in categoriaSelecionada){
-            this.categoriaSelecionada = x;
-            break;
-        }
-        for (p in listaProdutos) {
-            pesquisarProdutoById(p).then(function(snapshot) {
-                item = snapshot.val();
-                if(item.id_categoria == this.categoriaSelecionada){
-                    var option = document.createElement('option');
-                    var att = document.createAttribute("modelvalue");
-                    att.value = item.id;
-                    option.setAttributeNode(att);
-                    option.text = item.descricao;
-                    dataList.appendChild(option);
-                    dataList.setAttributeNode(att);
-                }
-            });
-        }
-    });
+            for(x in categoriaSelecionada){
+                this.categoriaSelecionada = x;
+                break;
+            }
+            for (p in listaProdutos) {
+                pesquisarProdutoById(p).then(function(snapshot) {
+                    item = snapshot.val();
+                    if(item.id_categoria == this.categoriaSelecionada){
+                        var option = document.createElement('option');
+                        var att = document.createAttribute("modelvalue");
+                        att.value = item.id;
+                        option.setAttributeNode(att);
+                        option.text = item.descricao;
+                        dataList.appendChild(option);
+                        dataList.setAttributeNode(att);
+                    }
+                });
+            }
+        });
 }
 
 function pesquisarProdutoById(id){
@@ -154,6 +156,12 @@ function pesquisarItemCompraById(id){
     });
 }
 
+function pesquisarItemCompraByIdProduto(id){
+    return itemCompraDAO.orderByChild("id_produto").equalTo(id).once('value').then( function(snapshot) {
+      return snapshot.val();
+  });
+}
+
 function montarListaCompras(){
     tabela = document.getElementById("table_lista_compra");
     for (i in listaItensCompras){
@@ -168,11 +176,11 @@ function montarListaCompras(){
                     tdProduto.appendChild(document.createTextNode(snapshot.val().descricao));
                     pesquisarCategoriaById(snapshot.val().id_categoria).then(function(snapshot) {
                         var tdCategoria = document.createElement('td');
-                        // var tdCategoriaContent = document.createElement('td');
                         tdCategoria.style.borderRadius= "50%";
                         tdCategoria.style.textAlign="center";
                         tdCategoria.style.color = snapshot.val().cor;
                         tdCategoria.appendChild(document.createTextNode(snapshot.val().descricao));
+                        // var tdCategoriaContent = document.createElement('td');
                         tr.appendChild(tdCategoria);
                         tr.appendChild(tdProduto);
                         tr.appendChild(tdQtd);
@@ -188,7 +196,6 @@ function montarListaCompras(){
 }
 
 function montarSelectCategoria(obj){
-    console.log(obj.value);
     pesquisarCategoriaByDescricao(obj.value);
 }
 
@@ -204,19 +211,75 @@ function setarModelValue(element){
 }
 
 function incluirItemCompra(){
+    document.getElementById("ipCategoria").getAttribute("modelvalue");
     var idProduto = document.getElementById("ipProduto").getAttribute("modelvalue");
-    pesquisarProdutoById(idProduto).then(function(snapshot) {
-        var produto = snapshot.val();
-        var quantidadeItemCompra = document.getElementById("ipQuantidade").value;
-        console.log(quantidadeItemCompra);
-        console.log(produto.id);
-        var itemCompraData = {
-            comprado: false,
-            data_lancamento: "2017-01-17",
-            id_produto: produto.id,
-            qtd : quantidadeItemCompra
-        };
-        var newKey = itemCompraDAO.push().key;
-        itemCompraDAO.child(newKey).set(itemCompraData);
-    });
+    var quantidadeItemCompra = document.getElementById("ipQuantidade").value;
+    if(idProduto){
+        pesquisarProdutoById(idProduto).then(function(snapshot) {
+            var produto = snapshot.val();
+            itemCompraP = pesquisarItemCompraByIdProduto(produto.id);
+            itemCompraP.then(function(itemCompraSelecionado){
+                if(itemCompraSelecionado){
+                    itemCompraSelecionado.qtd += quantidadeItemCompra;
+                    itemCompraDAO.child(itemCompraSelecionado).set(itemCompraData);
+                }else{
+                    var itemCompraData = {
+                        comprado: false,
+                        data_lancamento: "2017-01-17",
+                        id_produto: produto.id,
+                        qtd : quantidadeItemCompra
+                    };
+                    var newKey = itemCompraDAO.push().key;
+                    itemCompraDAO.child(newKey).set(itemCompraData);
+                }
+            });
+        });
+    }else{
+        var descricaoProduto = document.getElementById("ipProduto").value;
+        if(this.categoriaSelecionada){
+            //add produto
+            var newKeyProduto = produtoDAO.push().key;
+            var produtoData = {
+                id: newKeyProduto,
+                descricao : descricaoProduto,
+                id_categoria : this.categoriaSelecionada
+            };
+            produtoDAO.child(newKeyProduto).set(produtoData);
+            //add item_compra
+            var newKey = itemCompraDAO.push().key;
+            var itemCompraData = {
+                comprado: false,
+                data_lancamento: "2017-01-17",
+                id_produto: newKeyProduto,
+                qtd : quantidadeItemCompra
+            };
+            itemCompraDAO.child(newKey).set(itemCompraData);
+        }else{
+            //add categoria
+            var newKeyCategoria = categoriaDAO.push().key;
+            descricaoCategoria = document.getElementById("ipCategoria").value;
+            var categoriaData = {
+                id: newKeyCategoria,
+                descricao : descricaoCategoria
+            };
+            categoriaDAO.child(newKeyCategoria).set(categoriaData);
+            //add produto
+            var newKeyProduto = produtoDAO.push().key;
+            var produtoData = {
+                id: newKeyProduto,
+                descricao : descricaoProduto,
+                id_categoria : newKeyCategoria
+            };
+            produtoDAO.child(newKeyProduto).set(produtoData);
+            //add item_compra
+            var itemCompraData = {
+                comprado: false,
+                data_lancamento: "2017-01-17",
+                id_produto: newKeyProduto,
+                qtd : quantidadeItemCompra
+            };
+            var newKey = itemCompraDAO.push().key;
+            itemCompraDAO.child(newKey).set(itemCompraData);
+        }
+    }
 }
