@@ -53,6 +53,7 @@ function handleSignUp() {
   // [START createwithemail]
   firebase.auth().createUserWithEmailAndPassword(email, password).then(function(user) {
         var user = firebase.auth().currentUser;
+        updateUserProfile();
         firebaseConnection.database().ref(user.uid).set(
             {
                 'familiars':{
@@ -121,27 +122,21 @@ function sendPasswordReset() {
 function initApp() {
   // Listening for auth state changes.
   firebase.auth().onAuthStateChanged(function(user) {
-    document.getElementById("nav-login").style.display = "block";
-    document.getElementById("nav-logout").style.display = "none";
     document.getElementById("content").style.display = "none";
     document.getElementById("login-content").style.display = "block";
     if (user) {
       // User is signed in.
       if(user.displayName){
-          document.getElementById("config").innerHTML = user.displayName;
+           w3DisplayData("config", {"nome":user.displayName});
       }else{
-          document.getElementById("config").innerHTML = user.email;
+          w3DisplayData("config", {"nome":user.email});
       }
-      document.getElementById("nav-login").style.display = "none";
-      document.getElementById("nav-logout").style.display = "block"
       document.getElementById("login-content").style.display = "none";
       document.getElementById("content").style.display = "block";
       window.sessionStorage.setItem('base', user.uid);
       checarLogin();
     } else {
-      // User is signed out.
-      document.getElementById("nav-login").style.display = "block";
-      document.getElementById("nav-logout").style.display = "none";
+    //   // User is signed out.
       document.getElementById("content").style.display = "none";
       document.getElementById("login-content").style.display = "block";
     }
@@ -149,8 +144,9 @@ function initApp() {
 }
 
 function updateUserProfile() {
+    var user = firebase.auth().currentUser;
     user.updateProfile({
-      displayName: document.getElementById("username").value
+      displayName: document.getElementById("new-nome").value
     }).then(function() {
       // Update successful.
     }, function(error) {

@@ -17,9 +17,6 @@ var listaItensCompras;
 
 function checarLogin(){
     if(window.sessionStorage.getItem('base')){
-        document.getElementById("nav-login").style.display = "none";
-        document.getElementById("nav-logout").style.display = "block";
-        document.getElementById("config").innerHTML = window.sessionStorage.getItem('usuario');
         // montando DAOs
         base = window.sessionStorage.getItem('base');
         categoriaDAO = firebaseConnection.database().ref('/'+base+'/categorias/');
@@ -31,17 +28,10 @@ function checarLogin(){
                   listaProdutos = s.val();
               }).then(function(s) {
                         itemCompraDAO = firebaseConnection.database().ref('/'+base+'/itens_compras/');
-                        itemCompraDAO.once('value').then(function(s) {
-                            listaItensCompras = s.val();
-                        }).then(function(s) {
-                        // montando a View
-                        montarListaCompras();
-                        })
+                        carregarItensCompra();
                     })
                 });
     }else{
-        document.getElementById("nav-login").style.display = "block";
-        document.getElementById("nav-logout").style.display = "none";
         if (dialogLoading.open) {
             dialogLoading.close();
         }
@@ -161,8 +151,37 @@ function pesquisarItemCompraByIdProduto(id){
       return snapshot.val();
   });
 }
-
+function limparListaCompras(){
+    tabela = document.getElementById("table_lista_compra");
+    var new_tbody = document.createElement('table');
+    new_tbody.id = "table_lista_compra";
+    tabela.parentNode.replaceChild(new_tbody,tabela);
+}
 function montarListaCompras(){
+    var lista = {"ItensComprasVO":[]};
+    for (i in listaItensCompras){
+        pesquisarItemCompraById(i).then(function(snapshot) {
+            item = snapshot.val();
+            var qtd = item.qtd;
+            pesquisarProdutoById(item.id_produto).then(function(snapshot) {
+                    var produto = snapshot.val().descricao;
+                    pesquisarCategoriaById(snapshot.val().id_categoria).then(function(snapshot) {
+                        var categoria = snapshot.val().descricao;
+                        var itemCompraData = {"produto":produto, "categoria":categoria, "qtd":qtd};
+                        lista.ItensComprasVO.push(itemCompraData);
+                }).then(function(snapshot) {
+                    w3DisplayData("table_lista_compra", lista);
+                });
+            });
+        });
+    }
+    if (dialogLoading.open) {
+        dialogLoading.close();
+    }
+
+}
+function montarListaCompras2(){
+    limparListaCompras();
     tabela = document.getElementById("table_lista_compra");
     for (i in listaItensCompras){
         pesquisarItemCompraById(i).then(function(snapshot) {
@@ -193,6 +212,14 @@ function montarListaCompras(){
     if (dialogLoading.open) {
         dialogLoading.close();
     }
+}
+function carregarItensCompra(){
+    itemCompraDAO.once('value').then(function(s) {
+            listaItensCompras = s.val();
+        }).then(function(s) {
+        // montando a View
+        montarListaCompras();
+    });
 }
 
 function montarSelectCategoria(obj){
@@ -231,6 +258,7 @@ function incluirItemCompra(){
                     };
                     var newKey = itemCompraDAO.push().key;
                     itemCompraDAO.child(newKey).set(itemCompraData);
+                    dialogItemCompra.close();
                 }
             });
         });
@@ -254,6 +282,7 @@ function incluirItemCompra(){
                 qtd : quantidadeItemCompra
             };
             itemCompraDAO.child(newKey).set(itemCompraData);
+            dialogItemCompra.close();
         }else{
             //add categoria
             var newKeyCategoria = categoriaDAO.push().key;
@@ -280,6 +309,9 @@ function incluirItemCompra(){
             };
             var newKey = itemCompraDAO.push().key;
             itemCompraDAO.child(newKey).set(itemCompraData);
+            dialogItemCompra.close();
         }
     }
+    limparListaCompras();
+    carregarItensCompra();
 }

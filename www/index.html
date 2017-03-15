@@ -18,13 +18,10 @@
             <div class="mdl-layout__header-row">
               <span class="mdl-layout-title">Minha Casa</span>
               <div class="mdl-layout-spacer"></div>
-              <nav id="nav-login" class="mdl-navigation">
-
-              </nav>
-              <nav id="nav-logout" class="mdl-navigation" style="display:none">
+              <nav id="nav-logout" class="mdl-navigation">
                 <li id="show-config" class="mdl-navigation__link">
-                    <button id="config" class="mdl-button mdl-js-button mdl-button--colored mdl-button--raised mdl-js-ripple-effect">
-
+                    <button id="config" class="mdl-button mdl-js-button mdl-button--colored mdl-button--raised mdl-js-ripple-effect" >
+                        {{nome}}
                     </button>
                 </li>
                 <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
@@ -73,17 +70,17 @@
                             <div class="mdl-card__supporting-text">
                                 <div class="mdl-grid">
                                         <div class="mdl-cell mdl-cell--12">
-                                            <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp" style="font-size:15px">
-                                              <thead>
+                                            <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp" style="font-size:15px" id="table_lista_compra">
                                                 <tr>
                                                   <th class="mdl-data-table__cell--non-numeric" >Categoria</th>
                                                   <th class="mdl-data-table__cell--non-numeric">Produto</th>
                                                   <th>Quant.</th>
                                                 </tr>
-                                              </thead>
-                                              <tbody id="table_lista_compra">
-
-                                              </tbody>
+                                                <tr w3-repeat="ItensComprasVO">
+                                                    <td>{{categoria}}</td>
+                                                    <td>{{produto}}</td>
+                                                    <td>{{qtd}}</td>
+                                                </tr>
                                             </table>
                                         </div>
                                         <div class="mdl-cell mdl-cell--12">
